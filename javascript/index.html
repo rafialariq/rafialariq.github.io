@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+      }
+
+      body {
+        width: 100%;
+        height: 100vh;
+        background-image: url(bgg.jpg);
+        background-position: center;
+        background-size: cover;
+        overflow: hidden;
+        font-family: Arial, Helvetica, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: whitesmoke;
+      }
+
+      h1 {
+        padding: 10px;
+        border: 3px solid whitesmoke;
+      }
+
+      .clock-container {
+        display: flex;
+        text-align: center;
+      }
+
+      .time-container {
+        margin: 20px 20px;
+        font-weight: bold;
+      }
+
+      .time-container span {
+        display: block;
+      }
+
+      .time {
+        font-size: 5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Your Time Left Until New Year Eve</h1>
+    <div class="clock-container">
+      <div class="time-container">
+        <span class="time" id="day"></span>
+        <span class="title">Days</span>
+      </div>
+      <div class="time-container">
+        <span class="time" id="hour"></span>
+        <span class="title">Hours</span>
+      </div>
+      <div class="time-container">
+        <span class="time" id="minute"></span>
+        <span class="title">Minutes</span>
+      </div>
+      <div class="time-container">
+        <span class="time" id="second"></span>
+        <span class="title">Seconds</span>
+      </div>
+    </div>
+
+    <script>
+      const days1 = document.getElementById("day");
+      const hours1 = document.getElementById("hour");
+      const minutes1 = document.getElementById("minute");
+      const seconds1 = document.getElementById("second");
+
+      const newYear = "1 Jan 2023";
+
+      function countdown() {
+        const newYearDate = new Date(newYear);
+        const currentDate = new Date();
+
+        let totalSeconds = (newYearDate - currentDate) / 1000;
+
+        let days = Math.floor(totalSeconds / 3600 / 24);
+        let hours = Math.floor(totalSeconds / 3600) % 24;
+        let minutes = Math.floor(totalSeconds / 60) % 60;
+        let seconds = Math.floor(totalSeconds) % 60;
+
+        days1.innerHTML = formatTime(days);
+        hours1.innerHTML = formatTime(hours);
+        minutes1.innerHTML = formatTime(minutes);
+        seconds1.innerHTML = formatTime(seconds);
+      }
+
+      function formatTime(time) {
+        return time < 10 ? "0" + time : time;
+      }
+
+      countdown();
+
+      setInterval(countdown, 1000);
+    </script>
+  </body>
+</html>
